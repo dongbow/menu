@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.menu.dao.ResourcesDao">
+
+	<resultMap type="Resources" id="BaseResources">
+		<id column="res_id" property="resId" jdbcType="INTEGER"/>
+		<result column="res_name" property="resName" jdbcType="VARCHAR"/>
+		<result column="res_href" property="resHref" jdbcType="VARCHAR"/>
+		<result column="pid" property="pid" jdbcType="INTEGER"/>
+		<collection property="roles" ofType="Role">
+			<id column="role_id" property="roleId" jdbcType="INTEGER"/>
+			<result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+		</collection>
+	</resultMap>
+
+    <select id="getMenu" resultMap="BaseResources">
+        select distinct(r.res_id), r.res_name, r.res_href, r.pid from resources as r, role as l, role_resources as rr where 
+        	r.res_id = rr.res_id and l.role_id = rr.role_id and l.role_id in 
+        	<foreach collection="array" index="index" item="roleIds" open="(" separator="," close=")">  
+            	#{roleIds}   
+    		</foreach>
+    		 order by r.res_id asc
+    </select>
+
+</mapper>
