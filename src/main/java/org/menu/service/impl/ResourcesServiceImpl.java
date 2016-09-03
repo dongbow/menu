@@ -15,7 +15,6 @@ public class ResourcesServiceImpl implements ResourcesService {
 	@Resource
 	private ResourcesDao resourcesDao;
 	
-	@Override
 	public List<Resources> getMenu(List<Integer> roleIds) {
 		return resourcesDao.getMenu(roleIds.toArray());
 	}
