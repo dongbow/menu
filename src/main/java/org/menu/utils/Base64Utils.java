@@ -5,7 +5,7 @@ import sun.misc.BASE64Decoder;
 
 import java.io.UnsupportedEncodingException;
 
-public class Base64Util {
+public class Base64Utils {
 
     // 加密  encode
     public static String getBase64(String str) {  
@@ -37,11 +37,5 @@ public class Base64Util {
         }  
         return result;  
     }
-    
-    public static void main(String[] args) {
-		String s = "单身汪~~";
-		System.out.println(getBase64(s));
-		System.out.println(getFromBase64(getBase64(s)));
-	}
 
 }
