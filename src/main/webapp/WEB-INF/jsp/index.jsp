@@ -8,7 +8,7 @@
 <title>Index</title>
 </head>
 <body>
-<a href="/menu/logout">退出</a><br/>
+<a href="/menu/account/logout">退出</a><br/>
 <c:forEach var="list" items="${reslist}">
 	<c:if test="${list.resources != null}">
 		<br/><a href="#">${list.resName}</a>
