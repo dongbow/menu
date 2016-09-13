@@ -26,31 +26,36 @@ public class MenuController {
 	@Resource
 	private ResourcesService resourcesService;
 	
-	@RequestMapping("/login")
+	@RequestMapping("/account/login")
 	public String login() {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/dologin", method = RequestMethod.POST)
 	public String loginCheck(HttpServletRequest request, HttpServletResponse response,
 			String username, String password) {
 		User user = userService.login(username, password);
-		response.addCookie(CookieUtils.createMenuCookie(user.getUserId(), 
-				RoleIdsUtils.getRoleIds(user.getRoles()), user.getUserName()));
-		return "redirect:/index";
+		if(user != null) {
+			response.addCookie(CookieUtils.createMenuCookie(user.getUserId(), user.getIsAdmin(), 
+					RoleIdsUtils.getRoleIds(user.getRoles()), user.getUserName()));
+			return "redirect:/system/auth/index";
+		} else {
+			return "redirect:/account/login";
+		}
+		
 	}
 	
-	@RequestMapping("/index")
+	@RequestMapping("/system/auth/index")
 	public String index(HttpServletRequest request) {
 		List<Resources> list = TreeUtils.merge(resourcesService.getMenu(CookieUtils.getRoleIdsFromCookie(request)));
 		request.setAttribute("reslist", list);
 		return "index";
 	}
 	
-	@RequestMapping("/logout")
+	@RequestMapping("/account/logout")
 	public String logout(HttpServletResponse response) {
 		response.addCookie(CookieUtils.makeCookieExpire(CookieUtils.MENU_COOKIE));
-		return "redirect:/login";
+		return "redirect:/account/login";
 	} 
 	
 }

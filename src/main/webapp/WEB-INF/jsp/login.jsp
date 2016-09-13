@@ -7,7 +7,7 @@
 <title>Login</title>
 </head>
 <body>
-<form action="/menu/dologin" method="post">
+<form action="/menu/account/dologin" method="post">
 	<input type="text" name="username">
 	<input type="password" name="password">
 	<input type="submit" value="login">

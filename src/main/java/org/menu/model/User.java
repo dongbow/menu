@@ -7,6 +7,7 @@ public class User {
 	private long userId;
 	private String userName;
 	private String password;
+	private Integer isAdmin;
 	private List<Role> roles;
 
 	public List<Role> getRoles() {
@@ -39,6 +40,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Integer getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Integer isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

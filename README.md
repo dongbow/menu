@@ -1,3 +1,3 @@
 # menu
 
-menu model
+简单封装的权限控制

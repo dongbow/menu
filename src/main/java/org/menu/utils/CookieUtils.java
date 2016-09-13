@@ -19,8 +19,8 @@ public class CookieUtils {
 		return cookie;
 	}
 	
-	public static Cookie createMenuCookie(long userId, String roleIds, String userName) {
-		String value = userId + ";" + roleIds + ";" + userName;
+	public static Cookie createMenuCookie(long userId, Integer isAdmin, String roleIds, String userName) {
+		String value = userId + ";" + isAdmin + ";" + roleIds + ";" + userName;
 		Cookie cookie = new Cookie(MENU_COOKIE, Base64Utils.getBase64(value));
 		cookie.setPath(PATH);
 		cookie.setMaxAge(EXPIRE_TIME);
@@ -50,6 +50,10 @@ public class CookieUtils {
 		return (long) getValue(request, "userId");
 	}
 	
+	public static Integer getIsAdminFromCookie(HttpServletRequest request) {
+		return (Integer) getValue(request, "isAdmin");
+	}
+	
 	public static String getUserNameFromCookie(HttpServletRequest request) {
 		return (String) getValue(request, "userName");
 	}
@@ -70,6 +74,8 @@ public class CookieUtils {
 		if ("userId".equals(field)) {
 			return o[0];
 		} else if ("userName".equals(field)) {
+			return o[3];
+		} else if("roleIds".equals(field)) {
 			return o[2];
 		} else {
 			return o[1];
