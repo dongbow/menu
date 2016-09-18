@@ -1,9 +1,9 @@
-package org.menu.dao;
+package org.menu.service;
 
 import java.util.List;
 
-public interface RoleDao {
+public interface RoleService {
 
 	public List<Integer> getRoleIds();
-
+	
 }

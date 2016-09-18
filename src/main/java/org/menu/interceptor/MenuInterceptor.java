@@ -19,8 +19,8 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 	
 	private String home = "/system/auth/index";
 	
-	@Value("${no}")
-	private String notInter;
+	@Value("${none}")
+	private String notInterceptor;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -34,7 +34,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 		
 		String uri = formatUri(request);
 		
-		if(!uri.startsWith(notInter)){
+		if(!uri.startsWith(notInterceptor)){
 			
 			if(CookieUtils.getCookieValue(CookieUtils.MENU_COOKIE, request) == null) {
 				logger.info("no login");

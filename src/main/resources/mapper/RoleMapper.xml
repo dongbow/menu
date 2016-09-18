@@ -18,7 +18,12 @@
 			<result column="res_name" property="resName" jdbcType="VARCHAR"/>
 			<result column="res_href" property="resHref" jdbcType="VARCHAR"/>
 			<result column="pid" property="pid" jdbcType="INTEGER"/>
+			<result column="res_type" property="resType" jdbcType="INTEGER"/>
 		</collection>
 	</resultMap>
+
+	<select id="getRoleIds" resultType="Integer">
+		select role_id from role
+	</select>
 
 </mapper>

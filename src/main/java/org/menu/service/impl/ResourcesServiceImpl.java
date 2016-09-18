@@ -19,4 +19,8 @@ public class ResourcesServiceImpl implements ResourcesService {
 		return resourcesDao.getMenu(roleIds.toArray());
 	}
 
+	public List<Resources> getMenuByRoleId(Integer roleId) {
+		return resourcesDao.getMenuByRoleId(roleId);
+	}
+
 }

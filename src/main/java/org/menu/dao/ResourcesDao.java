@@ -7,5 +7,7 @@ import org.menu.model.Resources;
 public interface ResourcesDao {
 
 	public List<Resources> getMenu(Object[] roleIds);
+
+	public List<Resources> getMenuByRoleId(Integer roleId);
 	
 }
