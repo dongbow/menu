@@ -1,12 +1,10 @@
 package org.menu.init;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import ltang.redis.service.RedisObjectListService;
 import ltang.redis.service.RedisObjectMapService;
 
 import org.menu.model.Resources;
@@ -20,9 +18,6 @@ import com.alibaba.fastjson.JSONObject;
 
 @Service
 public class InitService {
-	
-	@Resource
-	private RedisObjectListService listService;
 	
 	@Resource
 	private RedisObjectMapService mapService;

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
@@ -63,15 +64,21 @@ public class MenuController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/system/auth/getmenu", method = RequestMethod.POST)
-	public JSONObject getMenu(HttpServletRequest request) {
+	public JSONArray getMenu(HttpServletRequest request) {
+		JSONArray array = null;
 		List<Integer> ids = CookieUtils.getRoleIdsFromCookie(request);
 		JSONObject jsonObject = mapService.get("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), JSONObject.class);
 		if(jsonObject == null) {
-			List<Resources> list = TreeUtils.formatResources((resourcesService.getMenu(ids)));
-			jsonObject.put("menu", JSON.toJSONString(list));
-			mapService.save("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), jsonObject, JSONObject.class);
+			List<Resources> resources = TreeUtils.formatResources(resourcesService.getMenu(ids));
+			String object = JSON.toJSONString(resources);
+			array = JSONArray.parseArray(object);
+			jsonObject = new JSONObject();
+			jsonObject.put("menu", array.toJSONString());
+			//mapService.save("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), jsonObject, JSONObject.class);
+		} else {
+			array = JSONArray.parseArray(jsonObject.getString("menu"));
 		}
-		return jsonObject;
+		return array;
 	}
 	
 	@RequestMapping("/account/logout")
