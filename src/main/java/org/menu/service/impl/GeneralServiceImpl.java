@@ -18,7 +18,8 @@ public class GeneralServiceImpl implements GeneralService{
 	public boolean authMenu(String uri, Object[] roleIds) {
 		List<Resources> list = resourcesDao.getMenu(roleIds);
 		for (Resources resources : list) {
-			if(uri.equals(resources.getResHref())) {
+			System.out.println(resources.getResHref());
+			if(resources.getResHref().indexOf(uri) >= 0) {
 				return true;
 			}
 		}

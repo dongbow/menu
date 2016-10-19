@@ -28,7 +28,7 @@ public class InitService {
 	@Resource
 	private RoleService roleService;
 	
-	@PostConstruct
+	//@PostConstruct
 	public void init() {
 		List<Integer> roleIds = roleService.getRoleIds();
 		for (Integer roleId : roleIds) {

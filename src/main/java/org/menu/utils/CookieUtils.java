@@ -47,22 +47,22 @@ public class CookieUtils {
 	}
 	
 	public static long getUserIdFromCookie(HttpServletRequest request) {
-		return (long) getValue(request, "userId");
+		return Long.parseLong(getValue(request, "userId"));
 	}
 	
 	public static Integer getIsAdminFromCookie(HttpServletRequest request) {
-		return (Integer) getValue(request, "isAdmin");
+		return Integer.parseInt(getValue(request, "isAdmin"));
 	}
 	
 	public static String getUserNameFromCookie(HttpServletRequest request) {
-		return (String) getValue(request, "userName");
+		return getValue(request, "userName");
 	}
 	
 	public static List<Integer> getRoleIdsFromCookie(HttpServletRequest request) {
 		return RoleIdsUtils.decodeRoleIds(getValue(request, "roleIds"));
 	}
 	
-	private static Object getValue(HttpServletRequest request, String field) {
+	private static String getValue(HttpServletRequest request, String field) {
 		String cookieValue = null;
 		Cookie cookie[] = request.getCookies();
 		for (Cookie c : cookie) {
@@ -70,15 +70,15 @@ public class CookieUtils {
 				cookieValue = Base64Utils.getFromBase64(c.getValue());
 			}
 		}
-		Object o[] = cookieValue.split(";");
+		String s[] = cookieValue.split(";");
 		if ("userId".equals(field)) {
-			return o[0];
+			return (String) (s[0] == null ? 0 : s[0]);
 		} else if ("userName".equals(field)) {
-			return o[3];
+			return s[3];
 		} else if("roleIds".equals(field)) {
-			return o[2];
+			return s[2];
 		} else {
-			return o[1];
+			return (String) (s[1] == null ? -1 : s[1]);
 		}
 	} 
 	

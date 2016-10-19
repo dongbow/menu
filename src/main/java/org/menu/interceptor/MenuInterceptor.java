@@ -47,7 +47,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 					return false;
 				}
 			}
-			if(!generalService.authMenu(uri, CookieUtils.getRoleIdsFromCookie(request).toArray())) {
+			if(uri.indexOf(home) < 0 && !generalService.authMenu(uri, CookieUtils.getRoleIdsFromCookie(request).toArray())) {
 				logger.info("no auth");
 				return false;
 			}

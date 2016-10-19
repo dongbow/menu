@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50550
 File Encoding         : 65001
 
-Date: 2016-09-05 14:46:35
+Date: 2016-10-19 16:13:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,19 +24,23 @@ CREATE TABLE `resources` (
   `res_name` varchar(20) NOT NULL,
   `res_href` varchar(100) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
+  `res_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`res_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of resources
 -- ----------------------------
-INSERT INTO `resources` VALUES ('1', '系统管理', '/system', null);
-INSERT INTO `resources` VALUES ('2', '用户管理', '/system/user', '1');
-INSERT INTO `resources` VALUES ('3', '角色管理', '/system/role', '1');
-INSERT INTO `resources` VALUES ('4', '资源管理', '/system/resources', '1');
-INSERT INTO `resources` VALUES ('5', '系统配置', '/config', null);
-INSERT INTO `resources` VALUES ('6', '系统信息', '/config/info', '5');
-INSERT INTO `resources` VALUES ('7', '关于我们', '/config/about', '5');
+INSERT INTO `resources` VALUES ('1', '系统管理', '/system', null, '1');
+INSERT INTO `resources` VALUES ('2', '用户管理', '/system/user', '1', '2');
+INSERT INTO `resources` VALUES ('3', '角色管理', '/system/role', '1', '2');
+INSERT INTO `resources` VALUES ('4', '资源管理', '/system/resources', '1', '2');
+INSERT INTO `resources` VALUES ('5', '系统配置', '/config', null, '1');
+INSERT INTO `resources` VALUES ('6', '系统信息', '/config/info', '5', '2');
+INSERT INTO `resources` VALUES ('7', '关于我们', '/config/about', '5', '2');
+INSERT INTO `resources` VALUES ('8', '添加用户', '/system/user/add', '2', '2');
+INSERT INTO `resources` VALUES ('9', '修改用户', '/system/user/modify', '2', '3');
+INSERT INTO `resources` VALUES ('10', '删除用户', '/system/user/delete', '2', '3');
 
 -- ----------------------------
 -- Table structure for role
@@ -64,7 +68,7 @@ CREATE TABLE `role_resources` (
   `role_id` int(11) NOT NULL,
   `res_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_resources
@@ -86,6 +90,11 @@ INSERT INTO `role_resources` VALUES ('14', '3', '3');
 INSERT INTO `role_resources` VALUES ('15', '3', '5');
 INSERT INTO `role_resources` VALUES ('16', '3', '6');
 INSERT INTO `role_resources` VALUES ('17', '3', '7');
+INSERT INTO `role_resources` VALUES ('18', '1', '8');
+INSERT INTO `role_resources` VALUES ('19', '1', '9');
+INSERT INTO `role_resources` VALUES ('20', '1', '10');
+INSERT INTO `role_resources` VALUES ('21', '2', '8');
+INSERT INTO `role_resources` VALUES ('22', '3', '10');
 
 -- ----------------------------
 -- Table structure for user
@@ -95,15 +104,17 @@ CREATE TABLE `user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(20) NOT NULL,
   `password` varchar(20) DEFAULT NULL,
+  `is_admin` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'super', '1');
-INSERT INTO `user` VALUES ('2', 'admin', '1');
-INSERT INTO `user` VALUES ('3', 'test', '1');
+INSERT INTO `user` VALUES ('1', 'super', '1', '1');
+INSERT INTO `user` VALUES ('2', 'admin', '1', '1');
+INSERT INTO `user` VALUES ('3', 'test', '1', '1');
+INSERT INTO `user` VALUES ('4', 'cc', '1', '0');
 
 -- ----------------------------
 -- Table structure for user_role

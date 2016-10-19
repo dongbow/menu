@@ -14,8 +14,8 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*"/>
-			<bean class="org.menu.interceptor.MenuInterceptor"></bean>
+			<mvc:mapping path="/**"/>
+			<bean class="org.menu.interceptor.MenuInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

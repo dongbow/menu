@@ -7,7 +7,7 @@ var URL = {
 };
 
 $(document).ready(function(){
-	getMenu();
+	//getMenu();
 });
 
 function getMenu(){

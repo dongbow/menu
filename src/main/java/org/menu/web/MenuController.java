@@ -62,24 +62,24 @@ public class MenuController {
 		return "index";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/system/auth/getmenu", method = RequestMethod.POST)
-	public JSONArray getMenu(HttpServletRequest request) {
-		JSONArray array = null;
-		List<Integer> ids = CookieUtils.getRoleIdsFromCookie(request);
-		JSONObject jsonObject = mapService.get("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), JSONObject.class);
-		if(jsonObject == null) {
-			List<Resources> resources = TreeUtils.formatResources(resourcesService.getMenu(ids));
-			String object = JSON.toJSONString(resources);
-			array = JSONArray.parseArray(object);
-			jsonObject = new JSONObject();
-			jsonObject.put("menu", array.toJSONString());
-			//mapService.save("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), jsonObject, JSONObject.class);
-		} else {
-			array = JSONArray.parseArray(jsonObject.getString("menu"));
-		}
-		return array;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/system/auth/getmenu", method = RequestMethod.POST)
+//	public JSONArray getMenu(HttpServletRequest request) {
+//		JSONArray array = null;
+//		List<Integer> ids = CookieUtils.getRoleIdsFromCookie(request);
+//		JSONObject jsonObject = mapService.get("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), JSONObject.class);
+//		if(jsonObject == null) {
+//			List<Resources> resources = TreeUtils.formatResources(resourcesService.getMenu(ids));
+//			String object = JSON.toJSONString(resources);
+//			array = JSONArray.parseArray(object);
+//			jsonObject = new JSONObject();
+//			jsonObject.put("menu", array.toJSONString());
+//			mapService.save("menu:sys:role:" + RoleIdsUtils.getRoleIdsByCookie(ids), jsonObject, JSONObject.class);
+//		} else {
+//			array = JSONArray.parseArray(jsonObject.getString("menu"));
+//		}
+//		return array;
+//	}
 	
 	@RequestMapping("/account/logout")
 	public String logout(HttpServletResponse response) {
